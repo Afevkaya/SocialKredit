@@ -127,4 +127,6 @@ dist
 .pnp.*
 
 #image
-uploads/
+.jpeg
+.jpg
+.png
