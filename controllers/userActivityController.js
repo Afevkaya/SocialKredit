@@ -1,5 +1,6 @@
 const UserActivity = require('../models/userActivity.model');
 const response = require ('../response.js');
+const {validationResult} = require('express-validator');
 
 
 //listeleme
@@ -59,6 +60,12 @@ exports.getByActivityId = (req,res)=>{
 
 //oluşturma
 exports.create = (req,res)=>{
+
+    let errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return new response(null,errors.array()).error400(res);
+    }
+
     const {userBy,activityBy} = req.body;
     const userActivity = new UserActivity();
 
