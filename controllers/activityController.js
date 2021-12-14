@@ -68,6 +68,12 @@ exports.create = (req, res) => {
 
 //güncelleme
 exports.update = (req, res) => {
+
+	let errors = validationResult(req);
+	if (!errors.isEmpty()) {
+		return new response(null,errors.array()).error400(res);
+	}
+
 	Activity.findById(req.params.activity_id).populate('categoryBy').exec((err, activity) => {
 		if (err) {
 			return new response(null, err).error500(res);
