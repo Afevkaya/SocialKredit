@@ -49,4 +49,7 @@ routes.route('/userActivities/:user_id').get(userActivityController.getByUserId)
 routes.route('/userActivities/:activity_id').get(userActivityController.getByActivityId);
 
 routes.route('/activities/:category_id').get(activityController.getByCategoryId);
+
+routes.route('/activity/saveImage').post(activityController.upload.single('picture'),activityController.saveImage);
+
 module.exports = routes;

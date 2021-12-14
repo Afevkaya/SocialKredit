@@ -19,6 +19,7 @@ const app = express();
 
 // gerekli olan middleware 
 app.use(cors());
+app.use(express.static('uploads'));
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
 
