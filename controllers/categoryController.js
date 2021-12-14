@@ -1,5 +1,7 @@
 const Category = require('../models/category.model');
 const response = require('../response');
+const {validationResult} = require('express-validator');
+
 
 //listeleme
 exports.list = (req,res)=>{
@@ -28,6 +30,12 @@ exports.getById = (req,res)=>{
 
 //oluşturma
 exports.create =(req,res)=>{
+
+    let errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return new response(null,errors.array()).error400(res);
+    }
+
     const{name} = req.body;
     const category = new Category();
 
