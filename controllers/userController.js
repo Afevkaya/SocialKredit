@@ -1,5 +1,6 @@
 const User = require('../models/user.model');
 const response = require('../response');
+const {validationResult} = require('express-validator');
 
 //listeleme
 exports.list = (req,res)=>{
@@ -28,6 +29,13 @@ exports.getById = (req,res)=>{
 
 //oluşturma
 exports.create = (req,res)=>{
+
+    let errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return new response(null,errors.array()).error400(res);
+    }
+
+
     const{name,surname,gender,email,phoneNumber,birthDate,point,password} = req.body;
     const user = new User();
 
