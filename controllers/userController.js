@@ -59,6 +59,12 @@ exports.create = (req,res)=>{
 
 //güncellme
 exports.update = (req,res) => {
+
+    let errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return new response(null,errors.array()).error400(res);
+    }
+
     User.findById(req.params.user_id,(err,user)=>{
         if (err) {
             return new response(null,err).error500();

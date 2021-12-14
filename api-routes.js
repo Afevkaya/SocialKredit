@@ -18,7 +18,7 @@ var userValidation = new Array(
 
 routes.route('/user').get(userController.list).post([userValidation],userController.create);
 routes.route('/user/:user_id').get(userController.getById)
-.put(userController.update).delete(userController.delete);
+.put([userValidation],userController.update).delete(userController.delete);
 
 routes.route('/userActivity').get(userActivityController.list).post(userActivityController.create);
 routes.route('/userActivity/:userActivity_id').get(userActivityController.getById);
