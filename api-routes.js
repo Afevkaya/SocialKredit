@@ -36,7 +36,7 @@ routes.route('/activity').get(activityController.list).post(activityController.c
 routes.route('/activity/:activity_id').get(activityController.getById).put(activityController.update).delete(activityController.delete);
 
 routes.route('/category').get(categoryController.list).post([categoryValidation],categoryController.create);
-routes.route('/category/:category_id').get(categoryController.getById).put(categoryController.update).delete(categoryController.delete);
+routes.route('/category/:category_id').get(categoryController.getById).put([categoryValidation],categoryController.update).delete(categoryController.delete);
 
 routes.route('/userActivities/:user_id').get(userActivityController.getByUserId);
 routes.route('/userActivities/:activity_id').get(userActivityController.getByActivityId);

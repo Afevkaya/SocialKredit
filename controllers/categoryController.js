@@ -52,6 +52,12 @@ exports.create =(req,res)=>{
 
 //güncelleme
 exports.update = (req,res)=>{
+
+    let errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return new response(null,errors.array()).error400(res);
+    }
+
     Category.findById(req.params.category_id,(err,category)=>{
         if (err) {
             return new response(null,err).error500(res);
