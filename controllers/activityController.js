@@ -1,5 +1,6 @@
 const Activity = require('../models/activity.model');
 const response = require('../response');
+const {validationResult} = require('express-validator');
 
 //listeleme
 exports.list = (req, res) => {
@@ -41,6 +42,12 @@ exports.getByCategoryId =(req,res)=>{
 
 //oluşturma
 exports.create = (req, res) => {
+
+	let errors = validationResult(req);
+	if (!errors.isEmpty()) {
+		return new response(null,errors.array()).error400(res);
+	}
+
 	const { title, description, click, like, picture, categoryBy } = req.body;
 	const activity = new Activity();
 

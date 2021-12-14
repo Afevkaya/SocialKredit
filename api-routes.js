@@ -20,6 +20,13 @@ var userActivityValidation = new Array(
     check('activityBy').notEmpty().withMessage('Activity boş olamaz')
 );
 
+var activityValidation = new Array(
+    check('title').notEmpty().withMessage('Title alanı boş olamaz'),
+    check('description').notEmpty().withMessage('Description alanı boş olamaz'),
+    check('picture').notEmpty().withMessage('picture alanı boş olamaz'),
+    check('categoryBy').notEmpty().withMessage('Category alanı boş olmaz')
+);
+
 var categoryValidation = new Array(
     check('name').notEmpty().withMessage('Category name boş olamaz')
 );
@@ -32,7 +39,7 @@ routes.route('/user/:user_id').get(userController.getById)
 routes.route('/userActivity').get(userActivityController.list).post([userActivityValidation],userActivityController.create);
 routes.route('/userActivity/:userActivity_id').get(userActivityController.getById);
 
-routes.route('/activity').get(activityController.list).post(activityController.create);
+routes.route('/activity').get(activityController.list).post([activityValidation],activityController.create);
 routes.route('/activity/:activity_id').get(activityController.getById).put(activityController.update).delete(activityController.delete);
 
 routes.route('/category').get(categoryController.list).post([categoryValidation],categoryController.create);
